@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>مجله فنی هنرستان</title><style>
+:root{--paper:#e8edf1;--ink:#10253b;--line:#b9c6d2;--card:#f9fbfc;--muted:#4b5e70;--yellow:#f2b600;--machine:#1d5a8a;--electronics:#23765b;--casting:#a8481f}
+:root[data-theme=dark]{--paper:#0e1a26;--ink:#e7eef5;--line:#2a4056;--card:#152636;--muted:#9fb3c5;--machine:#6fb0e3;--electronics:#59c2a0;--casting:#e8906a}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+[hidden]{display:none!important}
+body{margin:0;font-family:Vazirmatn,Tahoma,"Segoe UI",Arial,sans-serif;line-height:1.9;color:var(--ink);background-color:var(--paper);
+background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:28px 28px}
+a,button,summary,input{font:inherit}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.c-machine{--c:var(--machine)}.c-electronics{--c:var(--electronics)}.c-casting{--c:var(--casting)}
+#prog{position:fixed;top:0;right:0;height:4px;width:0;background:var(--yellow);z-index:9}
+.bar{position:sticky;top:0;z-index:5;background:var(--ink);color:var(--paper);display:flex;align-items:center;gap:14px;padding:10px 18px}
+.bar strong{margin-inline-end:auto}
+.bar a{text-decoration:none;padding:2px 6px}
+.bar a:hover{background:var(--yellow);color:#10253b}
+.theme{background:none;border:1px solid currentColor;color:inherit;padding:2px 12px;cursor:pointer}
+.wrap{max-width:1080px;margin:0 auto;padding:26px 16px 10px}
+.sheet{display:grid;grid-template-columns:1fr 250px;border:3px solid var(--ink);background:var(--card)}
+.sheet-main{padding:28px 26px}
+.sheet-main h1{margin:0 0 8px;font-size:clamp(26px,5vw,40px);line-height:1.4}
+.sheet-main p{margin:0;color:var(--muted);max-width:60ch}
+.block{border-inline-start:3px solid var(--ink);display:grid;grid-template-rows:repeat(4,1fr)}
+.block div{padding:8px 14px;border-bottom:1px solid var(--ink);font-size:14px}
+.block div:last-child{border-bottom:0}
+.block small{display:block;color:var(--muted);font-size:12px;line-height:1.4}
+.lead{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--ink);background:var(--card)}
+.lead>div{padding:20px 22px}
+.lead h2{margin:0 0 6px;font-size:22px}
+.lead .news{border-inline-end:2px solid var(--ink);background:var(--yellow);color:#10253b}
+.lead .news p{margin:0}
+.tip button{margin-top:8px;background:var(--ink);color:var(--paper);border:0;padding:4px 14px;cursor:pointer}
+.tools{margin:26px 0 12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.tools input{flex:1 1 220px;padding:9px 12px;border:2px solid var(--ink);background:var(--card);color:var(--ink)}
+.f{padding:7px 16px;border:2px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer}
+.f.on{background:var(--ink);color:var(--paper)}
+#count{color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.card{background:var(--card);border:2px solid var(--ink);border-inline-start:8px solid var(--c);display:flex;flex-direction:column}
+.card>a{display:block;text-decoration:none}
+.art{display:block;width:100%;height:160px;background:var(--paper);border-bottom:2px solid var(--ink)}
+.art .s{fill:none;stroke:var(--c);stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
+.art .s.p{fill:var(--paper)}
+.art .g{stroke:var(--line);stroke-width:1.5;stroke-dasharray:6 5}
+.art .f2{fill:var(--c)}.art .f2.soft{opacity:.35}
+.photo{object-fit:cover}
+.in{padding:14px 18px 16px;display:flex;flex-direction:column;flex:1}
+.meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:13px;color:var(--muted)}
+.chip{color:var(--c);font-weight:bold}
+.card h3{margin:6px 0;font-size:18px;line-height:1.6}
+.card h3 a{text-decoration:none}
+.card h3 a:hover{text-decoration:underline}
+.card p{margin:0 0 10px}
+.more{margin-top:auto;font-weight:bold;color:var(--c)}
+.empty{padding:30px;text-align:center;border:2px dashed var(--line);background:var(--card)}
+footer{max-width:1080px;margin:30px auto 0;padding:18px 16px 30px;color:var(--muted);text-align:center;font-size:14px}
+.read{max-width:760px;margin:0 auto;padding:26px 16px 40px}
+.read h1{font-size:clamp(24px,4.5vw,34px);line-height:1.6;margin:4px 0 8px}
+.read .art{height:auto;aspect-ratio:400/160;border:2px solid var(--ink);margin:16px 0 8px;max-height:300px}
+.crumb{font-size:14px;color:var(--muted);margin:0}
+.text{font-size:18px;line-height:2.1;background:var(--card);border:2px solid var(--ink);border-inline-start:8px solid var(--c);padding:10px 22px;margin-top:16px}
+.rel{margin-top:22px;border:2px solid var(--ink);background:var(--card);padding:6px 20px 12px}
+.rel h2{font-size:18px}.rel ul{margin:0;padding-inline-start:20px}
+.pn{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.pn a{border:2px solid var(--ink);background:var(--card);padding:10px 14px;text-decoration:none}
+.pn a:hover{background:var(--yellow);color:#10253b}
+.actions{margin-top:20px}
+.actions .theme{color:var(--ink)}
+@media (max-width:760px){.sheet,.lead{grid-template-columns:1fr}.block{border-inline-start:0;border-top:3px solid var(--ink);grid-template-columns:1fr 1fr;grid-template-rows:auto}.lead .news{border-inline-end:0;border-bottom:2px solid var(--ink)}.bar nav{display:none}.pn{grid-template-columns:1fr}}
+@media print{.bar,.tools,.tip,.pn,.actions,.rel,#prog{display:none}body{background:#fff;color:#000}}
+
+.star{background:none;border:0;font-size:24px;line-height:1;cursor:pointer;color:var(--c);padding:0 4px}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+.more{margin-top:0!important}
+.tools2{display:flex;gap:8px;margin:10px 0}
+.read .theme{color:var(--ink);border-color:var(--ink)}
+.quiz{margin-top:22px;border:2px solid var(--ink);border-inline-start:8px solid var(--yellow);background:var(--card);padding:4px 20px 16px}
+.opt{display:block;width:100%;text-align:right;margin:8px 0;padding:9px 12px;border:2px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer}
+.opt.ok{background:#2e8b57;color:#fff;border-color:#2e8b57}
+.opt.bad{background:#b3261e;color:#fff;border-color:#b3261e}
+.res{font-weight:bold;margin:6px 0 0}
+@media print{.quiz,.tools2,.star{display:none}}
+</style></head><body><div id="prog"></div><div class="bar"><strong>مجله فنی هنرستان</strong><nav><a href="#top">خانه</a><a href="#articles">مطالب</a><a href="#safety">ایمنی</a></nav><button class="theme" id="theme" type="button">حالت تیره</button></div><div id="home"></div><div id="read" hidden></div>
+<script>
+// === محتوای مجله: فقط همین بخش را ویرایش کنید ===
+// برای عکس واقعی، کنار این فایل عکس بگذارید و نامش را در "image" بنویسید (مثلاً "cnc.jpg")
+const DATA = {
+ "site": {
+  "title": "مجله فنی هنرستان",
+  "sub": "خبر، آموزش و نکته‌های کارگاهی برای هنرجویان رشته‌های فنی",
+  "school": "هنرستان فنی",
+  "issue": "شماره ۱"
+ },
+ "news": "فناوری‌های دیجیتال، از CNC تا میکروکنترلر، مرز میان کارگاه سنتی و کارگاه هوشمند را کمرنگ کرده‌اند. هنرجویی که هم نقشه‌خوانی و هم برنامه‌نویسی ابتدایی بداند، فرصت شغلی بیشتری دارد.",
+ "categories": {
+  "machine": "ماشین ابزار",
+  "electronics": "الکترونیک",
+  "casting": "ریخته‌گری"
+ },
+ "tips": [
+  "قبل از روشن کردن هر دستگاه، محافظ‌ها و کلید توقف اضطراری را بررسی کنید.",
+  "موهای بلند را ببندید و از آستین گشاد و جواهرات در کارگاه استفاده نکنید.",
+  "پشت دستگاه‌های گردان دستکش نپوشید؛ دستکش می‌تواند در قطعه بچرخد.",
+  "قبل از تعمیر مدار، منبع تغذیه را قطع و خازن‌ها را تخلیه کنید.",
+  "محل کار را تمیز نگه دارید؛ براده و روغن روی زمین علت اصلی لغزش است."
+ ],
+ "art": {
+  "machine": "<polygon class=\"s\" points=\"244.0,80.0 257.8,84.6 256.4,93.5 241.8,93.6 238.1,102.0 247.8,112.9 242.1,119.9 229.4,112.7 222.0,118.1 225.0,132.3 216.5,135.6 209.1,123.0 200.0,124.0 195.4,137.8 186.5,136.4 186.4,121.8 178.0,118.1 167.1,127.8 160.1,122.1 167.3,109.4 161.9,102.0 147.7,105.0 144.4,96.5 157.0,89.1 156.0,80.0 142.2,75.4 143.6,66.5 158.2,66.4 161.9,58.0 152.2,47.1 157.9,40.1 170.6,47.3 178.0,41.9 175.0,27.7 183.5,24.4 190.9,37.0 200.0,36.0 204.6,22.2 213.5,23.6 213.6,38.2 222.0,41.9 232.9,32.2 239.9,37.9 232.7,50.6 238.1,58.0 252.3,55.0 255.6,63.5 243.0,70.9\"/><circle class=\"s\" cx=\"200\" cy=\"80\" r=\"16\"/><line class=\"g\" x1=\"120\" y1=\"80\" x2=\"280\" y2=\"80\"/><line class=\"g\" x1=\"200\" y1=\"8\" x2=\"200\" y2=\"152\"/><polygon class=\"s\" points=\"346.0,118.0 353.8,121.3 352.3,127.7 343.8,127.1 340.1,132.1 343.3,140.0 337.7,143.4 332.2,137.0 326.0,138.0 322.7,145.8 316.3,144.3 316.9,135.8 311.9,132.1 304.0,135.3 300.6,129.7 307.0,124.2 306.0,118.0 298.2,114.7 299.7,108.3 308.2,108.9 311.9,103.9 308.7,96.0 314.3,92.6 319.8,99.0 326.0,98.0 329.3,90.2 335.7,91.7 335.1,100.2 340.1,103.9 348.0,100.7 351.4,106.3 345.0,111.8\"/><circle class=\"s\" cx=\"326\" cy=\"118\" r=\"7\"/>",
+  "electronics": "<rect class=\"s\" x=\"160\" y=\"48\" width=\"80\" height=\"64\" rx=\"4\"/><path class=\"s\" d=\"M160 64H110V30H60M160 96H100V130H50M240 64H290V30H340M240 96H300V130H350\"/><path class=\"s\" d=\"M180 48V28M200 48V28M220 48V28M180 112V132M200 112V132M220 112V132\"/><circle class=\"s p\" cx=\"60\" cy=\"30\" r=\"6\"/><circle class=\"s p\" cx=\"50\" cy=\"130\" r=\"6\"/><circle class=\"s p\" cx=\"340\" cy=\"30\" r=\"6\"/><circle class=\"s p\" cx=\"350\" cy=\"130\" r=\"6\"/><circle class=\"f2\" cx=\"200\" cy=\"80\" r=\"6\"/>",
+  "casting": "<polygon class=\"s\" points=\"130,34 230,34 214,112 146,112\"/><polygon class=\"f2 soft\" points=\"136,58 224,58 214,112 146,112\"/><path class=\"s\" d=\"M230 40Q262 52 262 86V108\"/><circle class=\"f2\" cx=\"262\" cy=\"92\" r=\"4\"/><rect class=\"s\" x=\"222\" y=\"112\" width=\"130\" height=\"38\"/><path class=\"s\" d=\"M262 112V124H312V112\"/><line class=\"g\" x1=\"40\" y1=\"150\" x2=\"360\" y2=\"150\"/>"
+ },
+ "articles": [
+  {
+   "cat": "machine",
+   "title": "CNC چیست و چرا قطعه‌ها را دقیق‌تر می‌سازد؟",
+   "summary": "ماشین CNC دستور کار را از یک برنامه عددی می‌گیرد و بدون خستگی دقیقاً همان حرکت را تکرار می‌کند.",
+   "level": "مقدماتی",
+   "minutes": 4,
+   "days_ago": 1,
+   "image": "",
+   "body": [
+    "CNC مخفف «کنترل عددی کامپیوتری» است. برنامه‌ای که به آن کد G می‌گویند مسیر حرکت ابزار، سرعت و عمق برش را مشخص می‌کند.",
+    "مزیت اصلی این ماشین‌ها تکرارپذیری است: قطعه صدم با قطعه اول تقریباً هیچ تفاوتی ندارد.",
+    "قبل از اجرای برنامه روی فلز، همیشه آن را در شبیه‌ساز یا با حرکت آزمایشی بدون قطعه بررسی کنید تا از برخورد ابزار با گیره جلوگیری شود."
+   ],
+   "quiz": {
+    "q": "قبل از اجرای برنامه CNC روی فلز، اول چه کاری بهتر است؟",
+    "o": [
+     "اجرای مستقیم روی قطعه اصلی",
+     "بررسی در شبیه‌ساز یا حرکت آزمایشی بدون قطعه",
+     "بالا بردن سرعت ماشین"
+    ],
+    "a": 1
+   }
+  },
+  {
+   "cat": "machine",
+   "title": "سرعت برش و پیشروی: دو عدد که عمر ابزار را تعیین می‌کنند",
+   "summary": "انتخاب نادرست دور و پیشروی باعث سایش زودهنگام، سطح زبر و حتی شکستن ابزار می‌شود.",
+   "level": "متوسط",
+   "minutes": 5,
+   "days_ago": 3,
+   "image": "",
+   "body": [
+    "سرعت برش به جنس قطعه و جنس ابزار بستگی دارد و از روی آن دور ماشین محاسبه می‌شود.",
+    "پیشروی یعنی مقدار حرکت ابزار در هر دور. پیشروی خیلی کم باعث اصطکاک و گرما و پیشروی خیلی زیاد باعث فشار بیش از حد روی ابزار می‌شود.",
+    "جدول‌های سازنده ابزار نقطه شروع خوبی هستند؛ سپس با توجه به صدای ماشین و شکل براده تنظیم نهایی را انجام دهید."
+   ],
+   "quiz": {
+    "q": "پیشروی خیلی زیاد چه مشکلی ایجاد می‌کند؟",
+    "o": [
+     "فشار بیش از حد روی ابزار",
+     "سرد شدن قطعه",
+     "کم شدن صدای ماشین"
+    ],
+    "a": 0
+   }
+  },
+  {
+   "cat": "electronics",
+   "title": "از بردبورد تا برد واقعی: مسیر ساخت یک پروژه الکترونیکی",
+   "summary": "هر مدار خوب اول روی بردبورد تست می‌شود، بعد به برد سوراخدار یا مدار چاپی می‌رود.",
+   "level": "مقدماتی",
+   "minutes": 5,
+   "days_ago": 5,
+   "image": "",
+   "body": [
+    "اول طرح را روی کاغذ بکشید و مقدار قطعه‌ها را محاسبه کنید. بعد مدار را روی بردبورد ببندید و عملکرد آن را بسنجید.",
+    "پس از تأیید، مدار را روی برد سوراخدار لحیم کنید یا برای تعداد بیشتر، برد مدار چاپی (PCB) سفارش دهید.",
+    "برای لحیم‌کاری خوب، نوک هویه را تمیز و قلع‌اندود نگه دارید و اتصال را کمتر از چند ثانیه گرم کنید."
+   ],
+   "quiz": {
+    "q": "قبل از لحیم کردن مدار، آن را کجا آزمایش می‌کنیم؟",
+    "o": [
+     "روی بردبورد",
+     "روی مدار چاپی نهایی",
+     "لازم نیست آزمایش شود"
+    ],
+    "a": 0
+   }
+  },
+  {
+   "cat": "electronics",
+   "title": "میکروکنترلرها: مغز کوچک دستگاه‌های امروزی",
+   "summary": "برد‌هایی مثل آردوینو و ESP32 خواندن سنسور و کنترل موتور و رله را برای هنرجو ساده کرده‌اند.",
+   "level": "متوسط",
+   "minutes": 4,
+   "days_ago": 8,
+   "image": "",
+   "body": [
+    "میکروکنترلر یک تراشه است که پردازنده، حافظه و پایه‌های ورودی و خروجی را در خود دارد.",
+    "با آن می‌توان دما را اندازه گرفت، موتور را کنترل کرد یا یک سیستم آبیاری هوشمند ساخت.",
+    "ESP32 علاوه بر این‌ها وای‌فای و بلوتوث دارد و برای پروژه‌های اینترنت اشیا انتخاب مناسبی است."
+   ],
+   "quiz": {
+    "q": "کدام برد وای‌فای و بلوتوث داخلی دارد؟",
+    "o": [
+     "رله معمولی",
+     "ESP32",
+     "دیود"
+    ],
+    "a": 1
+   }
+  },
+  {
+   "cat": "casting",
+   "title": "ریخته‌گری ماسه‌ای: قدیمی اما هنوز پرکاربرد",
+   "summary": "قالب از ماسه ساخته می‌شود، فلز مذاب در آن می‌رود و پس از سرد شدن قطعه بیرون می‌آید.",
+   "level": "مقدماتی",
+   "minutes": 4,
+   "days_ago": 10,
+   "image": "",
+   "body": [
+    "مراحل کار: ساخت مدل، قالب‌گیری با ماسه، ذوب فلز، ریختن مذاب، سرد شدن و در پایان تمیزکاری قطعه.",
+    "راهگاه و تغذیه‌گذاری درست جلوی بسیاری از عیب‌ها مثل حفره‌های انقباضی را می‌گیرد.",
+    "همیشه از لباس و کفش مقاوم، عینک و دستکش مخصوص استفاده کنید؛ رطوبت در تماس با مذاب بسیار خطرناک است."
+   ],
+   "quiz": {
+    "q": "ریختن مذاب روی قالب مرطوب چرا خطرناک است؟",
+    "o": [
+     "چون ماسه سنگین‌تر می‌شود",
+     "رطوبت ناگهان بخار می‌شود و می‌تواند مذاب را پرتاب کند",
+     "چون رنگ فلز عوض می‌شود"
+    ],
+    "a": 1
+   }
+  },
+  {
+   "cat": "casting",
+   "title": "عیب‌های رایج ریخته‌گری و راه پیشگیری",
+   "summary": "تخلخل گازی، انقباض و ناپری از شایع‌ترین عیب‌ها هستند و هر کدام دلیل مشخصی دارند.",
+   "level": "پیشرفته",
+   "minutes": 6,
+   "days_ago": 14,
+   "image": "",
+   "body": [
+    "تخلخل گازی معمولاً از رطوبت ماسه یا هوای محبوس می‌آید. با تهویه مناسب قالب و پیش‌گرم کردن شمش کاهش می‌یابد.",
+    "ناپری وقتی رخ می‌دهد که مذاب پیش از پر شدن قالب منجمد شود؛ دمای ریختن را بالاتر ببرید یا ضخامت مسیر را زیاد کنید.",
+    "ثبت دمای ریختن و شرایط هر ریخته‌گری کمک می‌کند علت عیب بعدی را سریع‌تر پیدا کنید."
+   ],
+   "quiz": {
+    "q": "«ناپری» چه زمانی رخ می‌دهد؟",
+    "o": [
+     "وقتی مذاب پیش از پر شدن قالب منجمد شود",
+     "وقتی ماسه خیلی خشک باشد",
+     "وقتی قطعه زیاد تمیز شود"
+    ],
+    "a": 0
+   }
+  }
+ ]
+};
+</script>
+<script>
+const root=document.documentElement,tb=document.getElementById('theme');
+function setTheme(t){root.dataset.theme=t;tb.textContent=t==='dark'?'حالت روشن':'حالت تیره';try{localStorage.setItem('theme',t)}catch(e){}}
+let st=null;try{st=localStorage.getItem('theme')}catch(e){}
+setTheme(st||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));
+tb.onclick=()=>setTheme(root.dataset.theme==='dark'?'light':'dark');
+const prog=document.getElementById('prog');
+addEventListener('scroll',()=>{const h=document.documentElement;const m=h.scrollHeight-h.clientHeight;prog.style.width=(m>0?h.scrollTop/m*100:0)+'%'});
+
+</script>
+<script>
+const D=DATA,S=D.site,A=D.articles,CAT=D.categories;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fa=n=>String(n).replace(/[0-9]/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const fixFa=s=>s.replace(/ي/g,'ی').replace(/ك/g,'ک').trim().toLowerCase();
+const ls=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}};
+const MONTHS=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+function toJ(d){const gy=d.getFullYear(),gm=d.getMonth()+1,gd=d.getDate(),cum=[0,31,59,90,120,151,181,212,243,273,304,334],gy2=gm>2?gy+1:gy;
+let days=355666+365*gy+Math.floor((gy2+3)/4)-Math.floor((gy2+99)/100)+Math.floor((gy2+399)/400)+gd+cum[gm-1];
+let jy=-1595+33*Math.floor(days/12053);days%=12053;jy+=4*Math.floor(days/1461);days%=1461;
+if(days>365){jy+=Math.floor((days-1)/365);days=(days-1)%365}
+let jm,jd;if(days<186){jm=1+Math.floor(days/31);jd=1+days%31}else{jm=7+Math.floor((days-186)/30);jd=1+(days-186)%30}return[jy,jm,jd]}
+function jText(ago){const d=new Date();d.setDate(d.getDate()-ago);const[y,m,x]=toJ(d);return fa(x)+' '+MONTHS[m-1]+' '+fa(y)}
+let saved=new Set(JSON.parse(ls('saved')||'[]')),cat='all',q='',fs=+ls('fs')||18,tipIdx=Math.floor(Math.random()*D.tips.length);
+const art=a=>a.image?`<img class="art photo" src="${esc(a.image)}" alt="${esc(a.title)}">`:`<svg class="art" viewBox="0 0 400 160" role="img" aria-label="${esc(CAT[a.cat])}">${D.art[a.cat]}</svg>`;
+const meta=a=>`<div class="meta"><span class="chip">${esc(CAT[a.cat])}</span><span>${jText(a.days_ago)}</span><span>${fa(a.minutes)} دقیقه مطالعه</span><span>سطح ${esc(a.level)}</span></div>`;
+const star=i=>`<button class="star" data-i="${i}" aria-label="ذخیره مطلب" aria-pressed="${saved.has(i)}">${saved.has(i)?'★':'☆'}</button>`;
+const card=(a,i)=>`<article class="card c-${a.cat}" data-i="${i}"><a href="#article-${i+1}">${art(a)}</a><div class="in">${meta(a)}<h3><a href="#article-${i+1}">${esc(a.title)}</a></h3><p>${esc(a.summary)}</p><div class="row"><a class="more" href="#article-${i+1}">ادامه مطلب</a>${star(i)}</div></div></article>`;
+const filters=['<button class="f on" data-cat="all">همه</button>',...Object.keys(CAT).map(k=>`<button class="f" data-cat="${k}">${esc(CAT[k])}</button>`),'<button class="f" data-cat="saved">★ ذخیره‌شده‌ها</button>'].join('');
+const texts=A.map(a=>fixFa(a.title+' '+a.summary));
+const homeEl=document.getElementById('home'),readEl=document.getElementById('read');
+homeEl.innerHTML=`<div class="wrap" id="top"><header class="sheet"><div class="sheet-main"><h1>${esc(S.title)}</h1><p>${esc(S.sub)}</p></div>
+<div class="block"><div><small>مؤسسه</small>${esc(S.school)}</div><div><small>شماره نشریه</small>${esc(S.issue)}</div><div><small>تاریخ انتشار</small>${jText(0)}</div><div><small>تعداد مطالب</small>${fa(A.length)} مطلب</div></div></header>
+<section class="lead" id="safety"><div class="news"><h2>خبر ویژه این هفته</h2><p>${esc(D.news)}</p></div><div class="tip"><h2>نکته ایمنی</h2><p id="tip"></p><button id="nextTip" type="button">نکته بعدی</button></div></section>
+<section id="articles"><div class="tools"><input id="q" type="search" placeholder="جستجو در مطالب..." aria-label="جستجو در مطالب">${filters}<span id="count" aria-live="polite"></span></div>
+<div class="grid">${A.map(card).join('')}</div><div class="empty" id="empty" hidden>مطلبی پیدا نشد. عبارت دیگری بنویسید یا فیلتر را روی «همه» بگذارید.</div></section></div>
+<footer>${esc(S.title)} | ${esc(S.school)} | پروژه دانش‌آموزی</footer>`;
+const cardEls=[...document.querySelectorAll('.card')];
+function apply(){let n=0;cardEls.forEach((c,i)=>{const ok=(cat==='all'||(cat==='saved'?saved.has(i):A[i].cat===cat))&&texts[i].includes(q);c.hidden=!ok;if(ok)n++});
+document.getElementById('empty').hidden=n>0;document.getElementById('count').textContent=fa(n)+' مطلب'}
+function showTip(){document.getElementById('tip').textContent=D.tips[tipIdx]}
+function refreshStars(){document.querySelectorAll('.star').forEach(b=>{const on=saved.has(+b.dataset.i);b.textContent=on?'★':'☆';b.setAttribute('aria-pressed',on)});if(cat==='saved')apply()}
+function read(i){const a=A[i],rel=A.map((b,j)=>[b,j]).filter(([b,j])=>b.cat===a.cat&&j!==i),qz=a.quiz;
+return`<main class="read c-${a.cat}"><p class="crumb"><a href="#top">خانه</a> / ${esc(CAT[a.cat])}</p><h1>${esc(a.title)}</h1>${meta(a)}${star(i)}${art(a)}
+<div class="tools2"><button class="theme" data-fs="-1" aria-label="کوچک‌تر">A−</button><button class="theme" data-fs="1" aria-label="بزرگ‌تر">A+</button></div>
+<div class="text" style="font-size:${fs}px">${a.body.map(p=>`<p>${esc(p)}</p>`).join('')}</div>
+${qz?`<section class="quiz" data-ans="${qz.a}"><h2>خودت را بسنج</h2><p>${esc(qz.q)}</p>${qz.o.map((o,k)=>`<button class="opt" data-k="${k}">${esc(o)}</button>`).join('')}<p class="res" aria-live="polite"></p></section>`:''}
+${rel.length?`<aside class="rel"><h2>مطالب مرتبط</h2><ul>${rel.map(([b,j])=>`<li><a href="#article-${j+1}">${esc(b.title)}</a></li>`).join('')}</ul></aside>`:''}
+<div class="pn">${i>0?`<a href="#article-${i}">مطلب قبلی: ${esc(A[i-1].title)}</a>`:''}${i<A.length-1?`<a href="#article-${i+2}">مطلب بعدی: ${esc(A[i+1].title)}</a>`:''}</div>
+<p class="actions"><button class="theme" data-print type="button">چاپ این مطلب</button></p></main>`}
+function route(){const r=/^#article-(\d+)$/.exec(location.hash);
+if(r&&A[r[1]-1]){readEl.innerHTML=read(r[1]-1);readEl.hidden=false;homeEl.hidden=true;document.title=A[r[1]-1].title+' | '+S.title;scrollTo(0,0)}
+else{readEl.hidden=true;homeEl.hidden=false;document.title=S.title;const h=location.hash,t=h.length>1?document.getElementById(h.slice(1)):null;if(t)t.scrollIntoView();else scrollTo(0,0)}}
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+if(b.classList.contains('star')){const i=+b.dataset.i;saved.has(i)?saved.delete(i):saved.add(i);ls('saved',JSON.stringify([...saved]));refreshStars()}
+else if(b.classList.contains('f')){document.querySelectorAll('.f').forEach(x=>x.classList.remove('on'));b.classList.add('on');cat=b.dataset.cat;apply()}
+else if(b.id==='nextTip'){tipIdx=(tipIdx+1)%D.tips.length;showTip()}
+else if(b.dataset.fs){fs=Math.min(28,Math.max(14,fs+2*b.dataset.fs));ls('fs',fs);document.querySelector('.text').style.fontSize=fs+'px'}
+else if(b.hasAttribute('data-print'))print();
+else if(b.classList.contains('opt')){const z=b.closest('.quiz'),ans=+z.dataset.ans,k=+b.dataset.k;
+z.querySelectorAll('.opt').forEach((o,j)=>{o.disabled=true;if(j===ans)o.classList.add('ok');else if(j===k)o.classList.add('bad')});
+z.querySelector('.res').textContent=k===ans?'آفرین! پاسخ درست است.':'پاسخ درست با رنگ سبز مشخص شد.'}});
+document.addEventListener('input',e=>{if(e.target.id==='q'){q=fixFa(e.target.value);apply()}});
+addEventListener('hashchange',route);showTip();apply();route();
+</script></body></html>
